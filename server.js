@@ -23,10 +23,16 @@ app.use(cors({
     origin: true,
     credentials: true
 }));
+app.use(express.json());
 
 // routes
-const testRoutes = require('./routes/test');
-app.use("/", testRoutes)
+const routes = require('./routes/routes');
+app.use("", routes);
+
+// const submitSignUpRoutes = require('./routes/submitSignUp');
+// app.post("/submitSignUp", submitSignUpRoutes.submitSignUp);
+// app.use("/submitSignUp", testRoutes);
+// app.post("/submitSignUp", testRoutes);
 
 // port
 const port = process.env.PORT || 8000;
