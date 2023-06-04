@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const cors = require('cors');
 require('dotenv').config();
+require("express-async-errors")
 
 // app
 const app = express();
