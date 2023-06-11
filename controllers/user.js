@@ -53,8 +53,8 @@ exports.signupUser = async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (user) return res.status(403).send({ message: 'User with given email already exist!' });
 
-    const salt = await bycrypt.genSalt(Number(process.env.SALT));
-    const hashedPassword = await bycrypt.hash(req.body.password, salt);
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
+    const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
     let newUser = await new User({
         ...req.body,

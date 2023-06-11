@@ -1,8 +1,5 @@
 const { User } = require('../models/User');
 const { Song, validate } = require('../models/Song');
-// const auth = require('../middlewares/auth');
-// const admin = require('../middlewares/admin');
-// const validObjectId = require('../middlewares/validObjectId');
 
 exports.createSong = async (req, res) => {
     const { error } = validate(req.body);
@@ -15,6 +12,11 @@ exports.createSong = async (req, res) => {
 exports.getSongs = async (req, res) => {
     const songs = await Song.find();
     res.status(200).send({ data: songs });
+}
+
+exports.getSongById = async (req, res) => {
+    const song = await Song.findById(req.params.id);
+    res.status(200).send({ data: song });
 }
 
 exports.updateSongById = async (req, res) => {

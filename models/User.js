@@ -7,11 +7,8 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    // gender: { type: String, required: true },
-    // date: { type: String, required: true },
-    // month: { type: String, required: true },
-    // year: { type: String, required: true },
-    // likedSongs: { type: [String], default: [] },
+    gender: { type: String, required: true },
+    likedSongs: { type: [String], default: [] },
     // playlists: { type: [String], default: [] },
     // isAdmin: { type: Boolean, default: false },
 });
@@ -27,13 +24,10 @@ userSchema.methods.generateAuthToken = function () {
 
 const validate = (user) => {
     const schema = joi.object({
-        name: joi.string().min(3).max(50).required(),
+        name: joi.string().required(),
         email: joi.string().min(5).max(255).required().email(),
         password: passwordComplexity().required(),
-        // date: joi.string().required(),
-        // month: joi.string().required(),
-        // year: joi.string().required(),
-        // gender: joi.string().valid("male", "female", "other").required(),
+        gender: joi.string().valid("male", "female", "other").required(),
     });
     return schema.validate(user);
 }
