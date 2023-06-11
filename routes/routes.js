@@ -4,7 +4,7 @@ const router = express.Router();
 // import controllers
 const { getTest } = require('../controllers/test');
 const { signupUser, getUsers, loginUser, getUserById, updateUserById, deleteUserById }= require('../controllers/user');
-const { createSong, getSongsByArtistId, getSongsByAlbumId, getSongs, updateSongById, deleteSongById, likeSong, getLikedSongs } = require('../controllers/song');
+const { createSong, getSongById, getSongsByArtistId, getSongsByAlbumId, getSongs, updateSongById, deleteSongById, likeSong, getLikedSongs } = require('../controllers/song');
 const { createPlaylist, getPlaylist, editPlaylistById, addSongToPlaylist, removeSongFromPlaylist } = require('../controllers/playlist');
 const { createArtist, getArtistById, getArtists, deleteArtistById, editArtistById, addSongToArtist, removeSongFromArtist, addAlbumToArtist, removeAlbumFromArtist}= require('../controllers/artist');
 const { createAlbum, getAlbumById, getOtherAlbumByArtistId, getAlbumsByArtistId, getAlbum, deleteAlbumById, editAlbumById, addSongToAlbum, removeSongFromAlbum} = require('../controllers/album');
@@ -28,6 +28,7 @@ router.post('/login', loginUser);
 //song routes
 router.post('/song', admin, createSong);
 router.get('/song', getSongs);
+router.get('/song/:id', getSongById);
 router.get('/song/artist/:artistId', getSongsByArtistId);
 router.get('/song/album/:albumId', getSongsByAlbumId);
 router.put('/song/:id', [validObjectId, admin], updateSongById);

@@ -17,6 +17,10 @@ exports.getSongs = async (req, res) => {
     res.status(200).send({ data: songs });
 }
 
+exports.getSongById = async (req, res) => {
+    const song = await Song.findById(req.params.id);
+    res.status(200).send({ data: song });
+}
 
 exports.getSongsByArtistId = async (req, res) => {
   const { artistId } = req.params;
