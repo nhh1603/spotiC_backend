@@ -15,6 +15,11 @@ exports.createPlaylist = async (req, res) => {
     res.status(201).send({ data: playlist, message: 'Playlist created successfully!' });
 }
 
+exports.getPlaylists = async (req, res) => {
+    const playlists = await Playlist.find();
+    res.status(200).send({ data: playlists });
+}
+
 exports.editPlaylistById = async (req, res) => {
     const schema = joi.object({
         name: joi.string().required(),

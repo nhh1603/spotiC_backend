@@ -5,7 +5,7 @@ const router = express.Router();
 const { getTest } = require('../controllers/test');
 const { signupUser, getUsers, loginUser, getUserById, updateUserById, deleteUserById }= require('../controllers/user');
 const { createSong, getSongById, getSongsByArtistId, getSongsByAlbumId, getSongs, updateSongById, deleteSongById, likeSong, getLikedSongs } = require('../controllers/song');
-const { createPlaylist, getPlaylist, editPlaylistById, addSongToPlaylist, removeSongFromPlaylist } = require('../controllers/playlist');
+const { createPlaylist, getPlaylists, editPlaylistById, addSongToPlaylist, removeSongFromPlaylist } = require('../controllers/playlist');
 const { createArtist, getArtistById, getArtists, deleteArtistById, editArtistById, addSongToArtist, removeSongFromArtist, addAlbumToArtist, removeAlbumFromArtist}= require('../controllers/artist');
 const { createAlbum, getAlbumById, getOtherAlbumByArtistId, getAlbumsByArtistId, getAlbum, deleteAlbumById, editAlbumById, addSongToAlbum, removeSongFromAlbum} = require('../controllers/album');
 
@@ -38,7 +38,7 @@ router.get('/song/like', auth, getLikedSongs);
 
 //playlist routes
 router.post('/playlist', auth, createPlaylist);
-router.get('/playlist', getPlaylist);
+router.get('/playlist', getPlaylists);
 router.put('/playlist/:id', [validObjectId, auth], editPlaylistById);
 router.put('/playlist/addsong', auth, addSongToPlaylist);
 router.put('/playlist/removesong', auth, removeSongFromPlaylist);
