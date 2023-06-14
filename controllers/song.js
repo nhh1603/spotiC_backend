@@ -1,5 +1,8 @@
 const { User } = require('../models/User');
 const { Song, validate } = require('../models/Song');
+// const auth = require('../middlewares/auth');
+// const admin = require('../middlewares/admin');
+// const validObjectId = require('../middlewares/validObjectId');
 
 exports.createSong = async (req, res) => {
     const { error } = validate(req.body);
@@ -18,6 +21,33 @@ exports.getSongById = async (req, res) => {
     const song = await Song.findById(req.params.id);
     res.status(200).send({ data: song });
 }
+
+exports.getSongsByArtistId = async (req, res) => {
+  const { artistId } = req.params;
+
+  const query = {};
+
+  if (artistId) {
+    query.artistId = artistId;
+  }
+
+  const songs = await Song.find(query);
+  res.status(200).send({ data: songs });
+};
+
+exports.getSongsByAlbumId = async (req, res) => {
+  const { albumId } = req.params;
+
+  const query = {};
+
+  if (albumId) {
+    query.albumId = albumId;
+  }
+
+  const songs = await Song.find(query);
+  res.status(200).send({ data: songs });
+};
+
 
 exports.updateSongById = async (req, res) => {
     const song = await Song.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
