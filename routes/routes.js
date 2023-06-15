@@ -8,6 +8,7 @@ const { createSong, getSongById, getSongsByArtistId, getSongsByAlbumId, getSongs
 const { createPlaylist, getPlaylists, editPlaylistById, addSongToPlaylist, removeSongFromPlaylist } = require('../controllers/playlist');
 const { createArtist, getArtistById, getArtists, deleteArtistById, editArtistById, addSongToArtist, removeSongFromArtist, addAlbumToArtist, removeAlbumFromArtist}= require('../controllers/artist');
 const { createAlbum, getAlbumById, getOtherAlbumByArtistId, getAlbumsByArtistId, getAlbum, deleteAlbumById, editAlbumById, addSongToAlbum, removeSongFromAlbum} = require('../controllers/album');
+const { getSearch } = require('../controllers/search');
 
 //import middlewares
 const auth = require('../middlewares/auth');
@@ -64,6 +65,9 @@ router.delete('/album/:id', [validObjectId, admin], deleteAlbumById);
 router.put('/album/:id', [validObjectId, admin], editAlbumById);
 router.put('/album/addsong', [validObjectId, admin], addSongToAlbum);
 router.put('/album/removesong', [validObjectId, admin], removeSongFromAlbum);
+
+//search routes
+router.get('/search', getSearch);
 
 
 module.exports = router;
