@@ -9,6 +9,7 @@ const playlistSchema = new mongoose.Schema({
     desc: { type: String },
     songs: { type: Array, default: [] },
     img: { type: String },
+    collaborative: { type: Boolean, default: false },
 });
 
 const validate = () => {
@@ -18,6 +19,7 @@ const validate = () => {
         desc: joi.string().allow(""),
         songs: joi.array().items(joi.string()),
         img: joi.string().allow(""),
+        collaborative: joi.boolean(),
     });
     return schema.validate(playlist);
 }
