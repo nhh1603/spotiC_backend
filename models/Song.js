@@ -4,6 +4,7 @@ const joi = require('joi');
 const songSchema = new mongoose.Schema({
     name: { type: String, required: true },
     artistId: { type: String, required: true },
+    playlistId: { type: String, required: true },
     // artistIds: { type: [String], default: [], required: true },
     artistName: { type: String, required: true }, // need delete
     albumId: { type: String, required: true },
@@ -17,6 +18,7 @@ const validate = (song) => {
     const schema = joi.object({
         name: joi.string().required(),
         artistId: joi.string().required(),
+        playlistId: joi.string().required(),
         // artist: joi.string().required(),
         artists: joi.array().items(joi.string()).required(),
         album: joi.string().required(),

@@ -20,6 +20,49 @@ exports.getPlaylists = async (req, res) => {
     res.status(200).send({ data: playlists });
 }
 
+exports.getPlaylistById = async (req, res) => {
+    const { playlistId } = req.params;
+  
+    const query = {};
+  
+    if (playlistId) {
+      query._id = playlistId;
+    }
+  
+    const playlist = await Playlist.find(query);
+    res.status(200).send({ data: playlist });
+  };
+  
+  exports.getOtherPlaylist = async (req, res) => {
+    const { exceptPlaylistId } = req.query;
+  
+    const query = {
+      _id: { $ne: exceptPlaylistId } 
+    };
+  
+    const playlists = await Playlist.find(query);
+    res.status(200).send({ data: playlists });
+  };
+  
+  
+//   exports.getPlaylistsByArtistId = async (req, res) => {
+//     const { artistId } = req.params;
+  
+//     const query = {};
+  
+//     if (artistId) {
+//       query.artistId = artistId;
+//     }
+  
+//     const playlists = await Playlist.find(query);
+//     res.status(200).send({ data: playlists });
+//   };
+  
+  exports.deletePlaylistById = async (req, res) => {
+      await Playlist.findByIdAndDelete(req.params.id);
+      res.status(200).send({ message: 'Playlist deleted successfully!' });
+  }
+
 exports.editPlaylistById = async (req, res) => {
     const schema = joi.object({
         name: joi.string().required(),
