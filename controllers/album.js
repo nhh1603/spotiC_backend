@@ -16,7 +16,7 @@ exports.createAlbum = async (req, res) => {
 }
 
 exports.getAlbum = async (req, res) => {
-    const album = await Song.find();
+    const album = await Album.find();
     res.status(200).send({ data: album });
 }
 
