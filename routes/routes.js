@@ -4,8 +4,8 @@ const router = express.Router();
 // import controllers
 const { getTest } = require('../controllers/test');
 const { signupUser, getUsers, loginUser, getUserById, updateUserById, deleteUserById }= require('../controllers/user');
-const { createSong, getSongById, getSongsByArtistId, getSongsByAlbumId, getSongs, updateSongById, deleteSongById, likeSong, getLikedSongs } = require('../controllers/song');
-const { createPlaylist, getPlaylists, editPlaylistById, addSongToPlaylist, removeSongFromPlaylist } = require('../controllers/playlist');
+const { createSong, getSongById, getSongsByArtistId, getSongsByAlbumId, getSongsByPlaylistId, getSongs, updateSongById, deleteSongById, likeSong, getLikedSongs } = require('../controllers/song');
+const { createPlaylist, getPlaylistById, getOtherPlaylist, getPlaylists, editPlaylistById, addSongToPlaylist, removeSongFromPlaylist } = require('../controllers/playlist');
 const { createArtist, getArtistById, getArtists, deleteArtistById, editArtistById, addSongToArtist, removeSongFromArtist, addAlbumToArtist, removeAlbumFromArtist}= require('../controllers/artist');
 const { createAlbum, getAlbumById, getOtherAlbumByArtistId, getAlbumsByArtistId, getAlbum, deleteAlbumById, editAlbumById, addSongToAlbum, removeSongFromAlbum} = require('../controllers/album');
 const { getSearch } = require('../controllers/search');
@@ -32,6 +32,7 @@ router.get('/song', getSongs);
 router.get('/song/:id', getSongById);
 router.get('/song/artist/:artistId', getSongsByArtistId);
 router.get('/song/album/:albumId', getSongsByAlbumId);
+router.get('/song/playlist/:playlistId', getSongsByPlaylistId);
 router.put('/song/:id', [validObjectId, admin], updateSongById);
 router.delete('/song/:id', [validObjectId, admin], deleteSongById);
 router.post('/song/like/:id', [validObjectId, auth], likeSong);
@@ -40,7 +41,10 @@ router.get('/song/like', auth, getLikedSongs);
 //playlist routes
 router.post('/playlist', auth, createPlaylist);
 router.get('/playlist', getPlaylists);
-router.put('/playlist/:id', [validObjectId, auth], editPlaylistById);
+router.get('/playlist/:playlistId', getPlaylistById);
+// router.get('/playlist/artist/:artistId', getPlaylistsByArtistId);
+router.get('/playlist/:playlistId/other', getOtherPlaylist);
+router.put('/playlist/:playlistId/:id', [validObjectId, auth], editPlaylistById);
 router.put('/playlist/addsong', auth, addSongToPlaylist);
 router.put('/playlist/removesong', auth, removeSongFromPlaylist);
 

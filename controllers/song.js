@@ -48,6 +48,18 @@ exports.getSongsByAlbumId = async (req, res) => {
   res.status(200).send({ data: songs });
 };
 
+exports.getSongsByPlaylistId = async (req, res) => {
+    const { playlistId } = req.params;
+  
+    const query = {};
+  
+    if (playlistId) {
+      query.playlistId = playlistId;
+    }
+  
+    const songs = await Song.find(query);
+    res.status(200).send({ data: songs });
+  };
 
 exports.updateSongById = async (req, res) => {
     const song = await Song.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
