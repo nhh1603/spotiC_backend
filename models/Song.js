@@ -9,7 +9,7 @@ const songSchema = new mongoose.Schema({
     albumId: { type: String, required: true },
     song: { type: String, required: true },
     cover: { type: String, required: true },
-    duration: { type: Number, required: true}, // need delete
+    duration: { type: String, required: true}, // need delete
     listenTimes: { type: Number, default: 0 },
 });
 
